@@ -1,0 +1,120 @@
+Create a complete, minimal Cloud Automation / CI/CD project using Node.js, Express, Docker, GitHub Actions, and Docker Hub.
+
+**Project goal:**
+Whenever I push code to the `main` branch on GitHub, GitHub Actions should automatically install dependencies, run tests, build a Docker image, and push the image to my Docker Hub repository.
+
+Keep the project beginner-friendly, simple, and easy to explain in a DevOps interview.
+
+### 1. Technology stack
+- Node.js and Express for the application.
+- HTML and CSS for a very simple frontend.
+- Jest and Supertest for automated testing.
+- Docker for containerization.
+- GitHub Actions for CI/CD.
+- Docker Hub for storing published images.
+
+### 2. Simple application UI
+Create a basic, clean webpage with:
+- Project title: Cloud Automation Dashboard.
+- A short description: Automated CI/CD using GitHub Actions and Docker.
+- A status indicator showing whether the application is running.
+- A button to check the application health.
+- A simple layout with a white background, minimal CSS, and no animations or external UI libraries.
+
+The health button should call the `/health` API endpoint and display the result.
+
+### 3. Backend
+Create a Node.js Express server with these endpoints:
+- `GET /` — serves the simple HTML frontend.
+- `GET /health` — returns JSON such as `{"status":"healthy"}`.
+
+Use port `3000` by default and allow the port to be configured through an environment variable.
+
+### 4. Docker
+Create a production-friendly `Dockerfile` that:
+- Uses an official Node.js Alpine image.
+- Installs production dependencies.
+- Copies only the required application files.
+- Exposes port 3000.
+- Runs the application as a non-root user where practical.
+
+Create a minimal `.dockerignore` excluding `node_modules`, `.git`, `.env`, and other unnecessary local files.
+
+### 5. Automated testing
+Use Jest and Supertest to test the `/health` endpoint.
+
+Configure `npm test` to execute the tests successfully in a non-interactive CI environment.
+
+Ensure the tests do not start a separate long-running server or require external services.
+
+### 6. GitHub Actions CI/CD
+Create `.github/workflows/ci-cd.yml` with this workflow:
+
+1. Trigger on pushes to `main`.
+2. Also run tests for pull requests targeting `main`.
+3. Check out the repository.
+4. Set up Node.js and install dependencies using `npm ci`.
+5. Run automated tests.
+6. If tests pass on a push to `main`, log in to Docker Hub using GitHub Actions secrets and variables.
+7. Build the Docker image.
+8. Push the image to Docker Hub with two tags:
+   - `latest`
+   - The current Git commit SHA.
+
+Use official, maintained Docker GitHub Actions for login, Buildx setup, and building/pushing images. Use pinned major versions consistent with the current official documentation. Do not expose credentials or hardcode secrets.
+
+Use these GitHub repository settings:
+- Variable: `DOCKERHUB_USERNAME`
+- Secret: `DOCKERHUB_TOKEN`
+
+The image name should be:
+`DOCKERHUB_USERNAME/cloud-cicd-automation`
+
+Make sure the build-and-push job depends on successful tests and does not publish images for pull requests.
+
+### 7. Keep the project minimal
+Create only these essential files:
+
+```text
+cloud-cicd-automation/
+├── public/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── tests/
+│   └── app.test.js
+├── src/
+│   └── app.js
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml
+├── .dockerignore
+├── Dockerfile
+├── package.json
+└── package-lock.json
+```
+
+Do not create a README, extra documentation, environment files, configuration files, additional workflows, Kubernetes manifests, Terraform files, AWS resources, databases, authentication systems, or unnecessary dependencies. Do not add a frontend framework.
+
+`package-lock.json` must be generated through npm so that `npm ci` works. Do not manually fabricate the lockfile.
+
+### 8. Quality requirements
+- Ensure the application works locally with `npm start`.
+- Ensure `npm test` passes.
+- Ensure the Docker image builds and the container runs correctly.
+- Ensure the frontend health-check button works.
+- Ensure the GitHub Actions workflow is valid YAML and follows the required job dependencies.
+- Keep the code readable, with only essential comments.
+- Do not claim that the workflow has been tested remotely or that the Docker Hub image has been published unless those actions have actually been performed.
+
+### 9. Final response
+After creating the project, provide:
+1. The final file tree.
+2. The exact commands to run and test the application locally.
+3. The exact commands to build and run the Docker container.
+4. The GitHub repository setup and push commands.
+5. The Docker Hub setup instructions.
+6. The GitHub Actions variables and secrets that I must configure.
+7. A short explanation of the automated pipeline.
+
+Generate the files directly in the current project workspace. Keep everything minimal and beginner-friendly.

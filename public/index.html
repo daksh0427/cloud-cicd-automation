@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Automation Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Cloud Automation Dashboard</h1>
+    <p>Automated CI/CD using GitHub Actions and Docker.</p>
+    
+    <div class="status-box">
+      <span>Status: </span>
+      <span id="app-status">Application is running</span>
+    </div>
+
+    <button id="health-btn">Check Application Health</button>
+    <div id="health-result" class="result"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

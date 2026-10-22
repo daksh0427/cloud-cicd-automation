@@ -1,0 +1,17 @@
+{
+  "name": "cloud-cicd-automation",
+  "version": "1.0.0",
+  "description": "Cloud Automation CI/CD project using Node.js, Express, Docker, and GitHub Actions",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "jest --ci --detectOpenHandles"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
+}
